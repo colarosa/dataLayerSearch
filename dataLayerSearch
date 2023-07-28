@@ -1,0 +1,34 @@
+function() {
+  // Recursive function to search for the 'items' array within the dataLayer
+  function searchItemsArray(obj) {
+    if (obj.hasOwnProperty('items') && Array.isArray(obj.items)) {
+      return obj.items; // 'items' array found, return it
+    }
+
+    // If 'items' array not found, check if the object has nested arrays and objects
+    for (var prop in obj) {
+      if (typeof obj[prop] === 'object') {
+        var result = searchItemsArray(obj[prop]); // Recursive call to search inner objects/arrays
+        if (result) {
+          return result; // Return the 'items' array if found in nested object/array
+        }
+      }
+    }
+
+    // Return null if 'items' array is not found in the current object
+    return null;
+  }
+
+  var dataLayer = window.dataLayer || []; // Assuming dataLayer is a global variable
+
+  // Start the search from the top-level objects in dataLayer
+  for (var i = 0; i < dataLayer.length; i++) {
+    var itemsArray = searchItemsArray(dataLayer[i]);
+    if (itemsArray) {
+      return itemsArray; // Return the 'items' array if found
+    }
+  }
+
+  // Return null if 'items' array is not found in any object in the dataLayer
+  return null;
+}
