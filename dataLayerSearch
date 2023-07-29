@@ -1,21 +1,22 @@
 function() {
-  // Recursive function to search for the 'items' array within the dataLayer
-  function searchItemsArray(obj) {
-    if (obj.hasOwnProperty('items') && Array.isArray(obj.items)) {
-      return obj.items; // 'items' array found, return it
+  // Recursive function to search for a specific property within the dataLayer
+  // You can change 'value' to search for any desired property
+  function searchValue(obj) {
+    if (obj.hasOwnProperty('value')) {
+      return obj.value; // 'value' property found, return its value
     }
 
-    // If 'items' array not found, check if the object has nested arrays and objects
+    // If the desired property not found, check if the object has nested arrays and objects
     for (var prop in obj) {
       if (typeof obj[prop] === 'object') {
-        var result = searchItemsArray(obj[prop]); // Recursive call to search inner objects/arrays
+        var result = searchValue(obj[prop]); // Recursive call to search inner objects/arrays
         if (result) {
-          return result; // Return the 'items' array if found in nested object/array
+          return result; // Return the desired property value if found in nested object/array
         }
       }
     }
 
-    // Return null if 'items' array is not found in the current object
+    // Return null if the desired property is not found in the current object
     return null;
   }
 
@@ -23,12 +24,12 @@ function() {
 
   // Start the search from the top-level objects in dataLayer
   for (var i = 0; i < dataLayer.length; i++) {
-    var itemsArray = searchItemsArray(dataLayer[i]);
-    if (itemsArray) {
-      return itemsArray; // Return the 'items' array if found
+    var value = searchValue(dataLayer[i]);
+    if (value) {
+      return value; // Return the desired property value if found
     }
   }
 
-  // Return null if 'items' array is not found in any object in the dataLayer
+  // Return null if the desired property is not found in any object in the dataLayer
   return null;
 }
