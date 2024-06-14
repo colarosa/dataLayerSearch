@@ -1,16 +1,18 @@
 function() {
+  // User can change this variable to the property they want to search for
+  var searchProperty = 'value'; // Change this to 'items', 'id', etc.
+
   // Recursive function to search for a specific property within the dataLayer
-  // You can change 'value' to search for any desired property
   function searchValue(obj) {
-    if (obj.hasOwnProperty('value')) {
-      return obj.value; // 'value' property found, return its value
+    if (obj.hasOwnProperty(searchProperty)) {
+      return obj[searchProperty]; // Desired property found, return its value
     }
 
-    // If the desired property not found, check if the object has nested arrays and objects
+    // If the desired property is not found, check if the object has nested arrays and objects
     for (var prop in obj) {
-      if (typeof obj[prop] === 'object') {
+      if (obj.hasOwnProperty(prop) && typeof obj[prop] === 'object' && obj[prop] !== null) {
         var result = searchValue(obj[prop]); // Recursive call to search inner objects/arrays
-        if (result) {
+        if (result !== null) {
           return result; // Return the desired property value if found in nested object/array
         }
       }
@@ -25,7 +27,7 @@ function() {
   // Start the search from the top-level objects in dataLayer
   for (var i = 0; i < dataLayer.length; i++) {
     var value = searchValue(dataLayer[i]);
-    if (value) {
+    if (value !== null) {
       return value; // Return the desired property value if found
     }
   }
@@ -33,3 +35,6 @@ function() {
   // Return null if the desired property is not found in any object in the dataLayer
   return null;
 }
+
+// Example usage:
+// Change the value of searchProperty variable to 'items', 'id', etc. to search for different properties.
