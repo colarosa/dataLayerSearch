@@ -1,40 +1,40 @@
-# DataLayer Property Search Script
+# 📊 DataLayer Property Search Script
 
 This JavaScript function enables users to search for a specific property within the `dataLayer` object, a common use case in analytics and tagging setups. The script is recursive, making it capable of traversing deeply nested objects and arrays to locate the desired property.
 
 ---
 
-## Features
+## ✨ Features
 
-- Searches for a specific property in the `dataLayer`.
-- Handles deeply nested objects and arrays using recursion.
-- Flexible configuration for specifying the property to search.
-- Can be used in Google Tag Manager (GTM) as a **Custom JavaScript Variable** to dynamically return the value of the specified property.
+- 🔍 **Search any property** in the `dataLayer`.
+- 📁 Handles **deeply nested objects and arrays** using recursion.
+- ⚙️ Easily configurable by changing one variable.
+- 🚀 Can be used in **Google Tag Manager (GTM)** as a **Custom JavaScript Variable** to dynamically retrieve property values.
 
 ---
 
-## How to Use in Google Tag Manager (GTM)
+## 🛠️ How to Use in Google Tag Manager (GTM)
 
-1. **Create a Custom JavaScript Variable in GTM:**
+1. **📦 Create a Custom JavaScript Variable in GTM:**
    - Navigate to **Variables** in GTM.
    - Click **New** and select **Custom JavaScript**.
    - Paste the script into the editor.
 
-2. **Customize the `searchProperty` Variable:**
-   - Update the `searchProperty` variable in the script to the name of the property you want to search for. For example:
+2. **✏️ Customize the `searchProperty` Variable:**
+   - Update the `searchProperty` variable in the script to the name of the property you want to search for:
      ```javascript
-     var searchProperty = 'value'; // Change this to 'items', 'id', etc.
+     var searchProperty = 'value'; // Example: Change this to 'items', 'id', etc.
      ```
 
-3. **Usage in Tags and Triggers:**
-   - Use the Custom JavaScript Variable in your tags to dynamically retrieve the value of the specified property from the `dataLayer`.
+3. **📋 Use the Variable in Tags and Triggers:**
+   - Reference the Custom JavaScript Variable in your tags, triggers, or other variables.
 
-4. **Output:**
+4. **🎯 Output:**
    - The variable will return the value of the specified property if found, or `null` if the property is not present in the `dataLayer`.
 
 ---
 
-## Code Example
+## 📝 Code Example
 
 ```javascript
 function() {
